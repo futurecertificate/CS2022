@@ -1,1 +1,1 @@
-# CS2022
+# CS2022 is kinda NICE

@@ -77,8 +77,8 @@ H => H1
 );
 
 mux: mux_2_16 PORT MAP(
-In0 => H1,
-In1 => G1,
+In0 => G1,
+In1 => H1,
 s =>FS(4),
 Z => F
 );

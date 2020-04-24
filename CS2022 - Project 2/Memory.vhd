@@ -8,13 +8,14 @@ entity Memory is
             data_in : in std_logic_vector(15 downto 0);
             address_in : in std_logic_vector(15 downto 0);
             mw: in std_logic;
+            Clk: in std_logic;
             data_out : out std_logic_vector(15 downto 0));
 end Memory;
 
 architecture Behavioral of Memory is
     type mem_array is array(0 to 511) of std_logic_vector(15 downto 0);
 begin
-    mem_process: process(address_in, data_in)
+    mem_process: process(address_in, data_in,Clk)
     variable data_mem: mem_array := (
     --M-0 
     x"0000", --0  
@@ -196,12 +197,14 @@ begin
 
     variable addr:integer range 0 to 511;
     begin
-    addr := conv_integer(address_in(8 downto 0));
-    if mw = '1' then
-        data_mem(addr) := data_in;
-    end if;
-    if mw = '0' then
-        data_out <= data_mem(addr);
+    if rising_edge(Clk) then
+        addr := conv_integer(address_in(8 downto 0));
+        if mw = '1' then
+            data_mem(addr) := data_in;
+        end if;
+        if mw = '0' then
+            data_out <= data_mem(addr);
+        end if;
     end if;
     end process;
 end Behavioral;

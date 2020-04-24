@@ -79,6 +79,7 @@ COMPONENT Memory port (
             data_in : in std_logic_vector(15 downto 0);
             address_in : in std_logic_vector(15 downto 0);
             mw: in std_logic;
+            Clk: in std_logic;
             data_out : out std_logic_vector(15 downto 0)
 );
 
@@ -169,6 +170,7 @@ dpb : datapath_1B Port Map(
 );
 
 mem : Memory Port Map (
+    Clk => Clk,
     address_in =>Add_out,
     data_in=>B_out,
     mw=>mw,
